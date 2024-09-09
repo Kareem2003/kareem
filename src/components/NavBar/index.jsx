@@ -44,8 +44,8 @@ const NavBar = () => {
 
       {/* Full-Screen Dropdown Menu */}
       <ul
-        className={`fixed inset-0 bg-gray flex flex-col justify-center items-center gap-7 text-3xl text-center transition-transform transform ${
-          isOpen ? "translate-x-0" : "translate-x-full"
+        className={`fixed inset-0 flex flex-col justify-center items-center gap-7 text-3xl text-center transition-transform transform ${
+          isOpen ? "translate-x-0 bg-gray " : "translate-x-full"
         } lg:relative lg:translate-x-0 lg:flex lg:flex-row lg:bg-transparent lg:gap-7 lg:text-lg lg:justify-end`}
       >
         <li className="relative">

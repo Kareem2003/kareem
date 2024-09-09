@@ -1,6 +1,7 @@
 import { useState } from "react";
 import NavBar from "./components/NavBar";
 import profileImage from "./assets/profile.png";
+import ProgressCard from "./components/ProgressCard";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -29,6 +30,12 @@ function App() {
             alt="Profile Photo"
           />
         </div>
+      </div>
+      <div className="flex my-20 justify-between">
+        <ProgressCard number={1} text="Years oF Experience" />
+        <ProgressCard number={3} text="Projects Completed" />
+        <ProgressCard number={4} text="Technologies Mastered" />
+        <ProgressCard number={200} text="Commits" />
       </div>
     </div>
   );
