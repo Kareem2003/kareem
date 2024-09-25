@@ -6,8 +6,9 @@ import Tailwind from "./images/tailwind.png";
 import TypeScript from "./images/typescript.png";
 import NodeJS from "./images/nodejs.png";
 import profile from "./images/profile.png";
+import DucksRow from "./images/DucksRow.png";
 
-export {
+export const assets = {
   CSS,
   HTML,
   JavaScript,
@@ -16,4 +17,5 @@ export {
   TypeScript,
   NodeJS,
   profile,
+  DucksRow,
 };

@@ -1,16 +1,10 @@
-import {
-  CSS,
-  HTML,
-  JavaScript,
-  ReactImg,
-  Tailwind,
-  TypeScript,
-  NodeJS,
-} from "../../assets";
+import { assets } from "../../assets";
 import ProgressCard from "../ProgressCard";
 import { useEffect, useRef } from "react";
 
 const SkillsLoop = () => {
+  const { CSS, HTML, JavaScript, ReactImg, Tailwind, TypeScript, NodeJS } =
+    assets;
   const marqueeRef = useRef(null);
 
   useEffect(() => {
