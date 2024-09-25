@@ -17,6 +17,7 @@ export default {
     fontFamily: {
       JetBrains: ["JetBrains Mono", "monospace"],
     },
+    extend: {},
   },
   plugins: [],
 };
