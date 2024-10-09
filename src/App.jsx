@@ -187,7 +187,7 @@ function App() {
         <Spacer space={"py-4 w-full"} />
         {/* Certifications */}
         <div className="my-12">
-          <h2 className="text-5xl font-bold mb-6 text-gray-200 text-center pb-5 uppercase">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-gray-200 text-center pb-5 uppercase">
             Certifications
           </h2>
           <div>
@@ -231,7 +231,7 @@ function App() {
         <Spacer space={"py-12 w-full"} />
         {/* Projects */}
         <div className="my-10">
-          <h2 className="text-5xl font-bold mb-6 text-gray-200 text-center pb-5 uppercase">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-gray-200 text-center pb-5 uppercase">
             Projects
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
@@ -255,7 +255,7 @@ function App() {
         <Spacer space={"py-12 w-full"} />
         {/* Contact */}
         <div className="my-10">
-          <h2 className="text-5xl font-bold mb-6 text-gray-200 text-center pb-5 uppercase">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-gray-200 text-center pb-5 uppercase">
             Get In Touch
           </h2>
           <p className="text-center text-lg text-gray-400 mb-10">
