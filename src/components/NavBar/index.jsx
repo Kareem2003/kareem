@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ImCancelCircle } from "react-icons/im";
 import { HiMiniBars3 } from "react-icons/hi2";
+import CV from "../../assets/myCV.pdf";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,7 +67,9 @@ const NavBar = () => {
         </li>
         <li className="relative">
           <a
-            href="#"
+            href={CV}
+            download="Kareem_Abdallah_CV.pdf"
+            target="_blank"
             className="hover:text-primary before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-primary before:transition-all before:duration-300 before:ease-in-out hover:before:w-full"
           >
             Resume

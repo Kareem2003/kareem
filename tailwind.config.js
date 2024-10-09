@@ -13,6 +13,8 @@ export default {
       primary: "#2196F3",
       white: "#ffffff",
       gray: "#4B4242",
+      textGray: "#D3D3D3AA",
+      red: "#ff0000",
     },
     fontFamily: {
       JetBrains: ["JetBrains Mono", "monospace"],

@@ -6,3 +6,22 @@
   background-color: #191919;
   color: #ffffff;
 }
+
+.rsis-container {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(15%, 15%);
+}
+
+.rsis-container > div:not(.rsis-image) {
+  display: none !important;
+}
+
+.rsis-image {
+  background-position: center center !important; /* Ensure the image is centered */
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  width: 70% !important;
+  height: 70% !important;
+}
