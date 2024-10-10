@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { FaPhoneAlt } from "react-icons/fa";
+import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa6";
 import { MdOutlineFileDownload } from "react-icons/md";
-import SimpleImageSlider from "react-simple-image-slider";
-import "react-slideshow-image/dist/styles.css";
 import { assets } from "./assets/index";
 import CV from "./assets/myCV.pdf";
 import NavBar from "./components/NavBar";
@@ -11,20 +9,10 @@ import PopupImage from "./components/PopupImage";
 import ProjectCard from "./components/ProjectCard";
 import SkillsLoop from "./components/SkillsLoop";
 import Spacer from "./components/Spacer";
-
-// Reusable ContactCard component
-const ContactCard = ({ icon: Icon, title, subtitle, link }) => (
-  <div
-    className="bg-gray-900 border border-gray-700 p-8 rounded-lg shadow-sm hover:shadow-lg hover:shadow-primary transition-shadow duration-300 cursor-pointer flex flex-col items-center"
-    onClick={() => (window.location.href = link)}
-  >
-    <div className="bg-blue-600 p-4 rounded-full mb-4">
-      <Icon size={28} className="text-white" />
-    </div>
-    <h3 className="text-2xl font-semibold text-gray-100 mb-2">{title}</h3>
-    <p className="text-lg text-gray-400">{subtitle}</p>
-  </div>
-);
+import emailjs from "@emailjs/browser";
+import ContactForm from "./components/ContactForm";
+import { Slide, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const {
@@ -40,6 +28,7 @@ function App() {
     WebDevCer1,
     WebDevCer2,
   } = assets;
+
   const images = [
     {
       url: WebDevCer2,
@@ -101,26 +90,21 @@ function App() {
     },
   ];
 
-  const [popupImageUrl, setPopupImageUrl] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0); // Start from 0th index
-  const [sliderDimensions, setSliderDimensions] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
+  const [isImageLoading, setIsImageLoading] = useState(true);
+  const [popupImageUrl, setPopupImageUrl] = useState(null);
 
   useEffect(() => {
-    const handleResize = () => {
-      setSliderDimensions({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
+    // Preload the next image when the currentIndex changes
+    const img = new Image();
+    img.src = images[currentIndex].url;
+    img.onload = () => setIsImageLoading(false);
+  }, [currentIndex]);
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const notify = () => toast("Success!");
 
   const handleNavClick = (toRight) => {
+    setIsImageLoading(true); // Set to loading before changing the image
     if (toRight) {
       const nextIndex = (currentIndex + 1) % images.length;
       setCurrentIndex(nextIndex);
@@ -170,6 +154,9 @@ function App() {
                 >
                   <FaLinkedin size={20} className="text-primary" />
                 </a>
+                <a href="https://wa.me/+201090992653" target="_blank">
+                  <FaWhatsapp size={20} className="text-primary" />
+                </a>
               </div>
             </div>
           </div>
@@ -191,7 +178,7 @@ function App() {
             Certifications
           </h2>
           <div>
-            <div className="flex flex-col md:flex-row justify-between items-start">
+            <div className="flex flex-col md:flex-row justify-between items-center">
               <div className="mt-6 mr-6 max-w-xl md:mt-0">
                 <h1 className="text-7xl mt-6 text-primary">
                   {images[currentIndex].number}
@@ -201,33 +188,70 @@ function App() {
                   {images[currentIndex].description}
                 </p>
               </div>
-              <div className="flex w-full max-w-xl max-h-xl">
-                <SimpleImageSlider
-                  width={
-                    sliderDimensions.width < 768
-                      ? sliderDimensions.width * 0.9
-                      : sliderDimensions.width * 0.4
-                  }
-                  height={
-                    sliderDimensions.height < 768
-                      ? sliderDimensions.height * 0.6
-                      : sliderDimensions.height * 0.4
-                  }
-                  images={images}
-                  showNavs={true}
-                  showBullets={true}
-                  currentIndex={currentIndex}
-                  onClickNav={(toRight) => handleNavClick(toRight)}
-                  onClickBullets={(idx) => setCurrentIndex(idx)}
-                  onSlideChange={(idx) => setCurrentIndex(idx)}
-                  onClick={() =>
-                    handleCertificationClick(images[currentIndex].url)
-                  }
-                />
+
+              <div className="relative mt-6 md:mt-0 flex justify-center">
+                <div>
+                  <div
+                    className={`min-w-full max-w-full lg:w-[600px] md:w-[500px] h-[50vh] lg:h-[50vh] overflow-hidden rounded-lg shadow-xl relative ${
+                      isImageLoading
+                        ? "opacity-0 scale-95"
+                        : "opacity-100 scale-100"
+                    }`}
+                  >
+                    <img
+                      src={images[currentIndex].url}
+                      alt={images[currentIndex].title}
+                      className={`w-full h-full object-cover transition duration-500 ease-in-out transform ${
+                        isImageLoading
+                          ? "opacity-0 scale-95"
+                          : "opacity-100 scale-100"
+                      }`}
+                      onClick={() =>
+                        handleCertificationClick(images[currentIndex].url)
+                      }
+                    />
+                  </div>
+
+                  {/* Custom Previous Button */}
+                  <button
+                    className="absolute top-1/2 left-4 text-dark bg-primary bg-opacity-10 hover:bg-opacity-40 p-4 rounded-full transform -translate-y-1/2 transition duration-300 ease-in-out"
+                    onClick={() => handleNavClick(false)}
+                  >
+                    <span className="text-3xl text-gray-300 hover:text-red">
+                      {"<"}
+                    </span>
+                  </button>
+
+                  {/* Custom Next Button */}
+                  <button
+                    className="absolute top-1/2 right-4 text-dark bg-primary bg-opacity-10 hover:bg-opacity-40 p-4 rounded-full transform -translate-y-1/2 transition duration-300 ease-in-out"
+                    onClick={() => handleNavClick(true)}
+                  >
+                    <span className="text-3xl text-gray-300 hover:text-red">
+                      {">"}
+                    </span>
+                  </button>
+
+                  {/* Cool Bullet Indicators */}
+                  <div className="flex justify-center mt-4 space-x-2">
+                    {images.map((_, index) => (
+                      <button
+                        key={index}
+                        className={`mx-1 w-3 h-3 rounded-full transition-all ${
+                          index === currentIndex
+                            ? "bg-primary scale-110 shadow-lg"
+                            : "bg-white hover:bg-primary hover:scale-110"
+                        }`}
+                        onClick={() => setCurrentIndex(index)}
+                      ></button>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
         <Spacer space={"py-12 w-full"} />
         {/* Projects */}
         <div className="my-10">
@@ -258,36 +282,63 @@ function App() {
           <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-gray-200 text-center pb-5 uppercase">
             Get In Touch
           </h2>
-          <p className="text-center text-lg text-gray-400 mb-10">
-            I’d love to hear from you! Let’s connect and work together.
+          <p className="text-center text-lg md:text-xl mb-8">
+            You can reach out to me via the contact information below:
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 justify-center items-center">
-            <ContactCard
-              icon={FaPhoneAlt}
-              title="Phone & WhatsApp"
-              subtitle="+2 010 9099 2653"
-              link="https://wa.me/201090992653"
-            />
-            <ContactCard
-              icon={FaEnvelope}
-              title="Email"
-              subtitle="kareemabdallah061@gmail.com"
-              link="mailto:kareemabdallah061@gmail.com"
-            />
+          <div className="flex flex-col gap-8">
+            <ContactForm />
           </div>
         </div>
       </div>
+
       {/* Footer */}
-      <footer className="bg-primary text-dark py-2 text-center">
-        <p>© 2024 Kareem Abdallah. All rights reserved.</p>
+      <footer className="bg-gray-800 text-white bg-primary text-center py-4">
+        <p className="pb-3">
+          &copy; 2024 Kareem Abdallah. All rights reserved.
+        </p>
+        <div className="flex justify-center gap-2">
+          <a
+            href="https://github.com/Kareem2003"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaGithub size={20} className="text-white" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/kareem2003"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaLinkedin size={20} className="text-white" />
+          </a>
+          <a
+            href="https://wa.me/+201090992653"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaWhatsapp size={20} className="text-white" />
+          </a>
+        </div>
       </footer>
-      {/* Popup Image */}
+
       {popupImageUrl && (
         <PopupImage
           imageUrl={popupImageUrl}
           onClose={() => setPopupImageUrl(null)}
         />
       )}
+      <ToastContainer
+        position="top-center"
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover={false}
+        theme="dark"
+        transition:Slide
+      />
     </>
   );
 }
