@@ -27,13 +27,13 @@ export const assets = {
   NodeJS,
   profile,
   DucksRow,
-  ReactCer, // done
-  NodeCer, // done
-  CloudCer, // done
-  GithubCer, // done
-  PSsolutionCer, // done
-  SavolaCer, // done
-  SoftSkillsCer, // done
-  WebDevCer1, // done
-  WebDevCer2, // done
+  ReactCer, 
+  NodeCer, 
+  CloudCer, 
+  GithubCer, 
+  PSsolutionCer, 
+  SavolaCer, 
+  SoftSkillsCer, 
+  WebDevCer1, 
+  WebDevCer2, 
 };

@@ -59,7 +59,7 @@ const NavBar = () => {
       >
         <li className="relative">
           <a
-            href="#"
+            href="#home"
             className="hover:text-primary before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-primary before:transition-all before:duration-300 before:ease-in-out hover:before:w-full"
           >
             Home
@@ -77,7 +77,7 @@ const NavBar = () => {
         </li>
         <li className="relative">
           <a
-            href="#"
+            href="#certificates"
             className="hover:text-primary before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-primary before:transition-all before:duration-300 before:ease-in-out hover:before:w-full"
           >
             Certificates
@@ -85,7 +85,7 @@ const NavBar = () => {
         </li>
         <li className="relative">
           <a
-            href="#"
+            href="#projects"
             className="hover:text-primary before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-primary before:transition-all before:duration-300 before:ease-in-out hover:before:w-full"
           >
             Projects
@@ -93,7 +93,7 @@ const NavBar = () => {
         </li>
         <li className="relative">
           <a
-            href="#"
+            href="#contact"
             className="hover:text-primary before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-primary before:transition-all before:duration-300 before:ease-in-out hover:before:w-full"
           >
             Contact

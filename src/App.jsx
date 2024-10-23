@@ -123,7 +123,10 @@ function App() {
       <div className="py-6 px-6 sm:px-12 md:px-24 lg:px-36 xl:px-48 font-JetBrains">
         <NavBar />
         {/* Home Section */}
-        <div className="flex flex-col-reverse md:flex-row items-center sm:justify-between">
+        <div
+          className="flex flex-col-reverse md:flex-row items-center sm:justify-between"
+          id="home"
+        >
           <div className="flex-1 text-center md:text-left">
             <p className="text-sm md:text-base">Front-End Developer</p>
             <h1 className="text-3xl md:text-5xl lg:text-6xl">{"Hello I'm"}</h1>
@@ -173,7 +176,7 @@ function App() {
         <SkillsLoop />
         <Spacer space={"py-4 w-full"} />
         {/* Certifications */}
-        <div className="my-12">
+        <div className="my-12" id="certificates">
           <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-gray-200 text-center pb-5 uppercase">
             Certifications
           </h2>
@@ -254,31 +257,40 @@ function App() {
 
         <Spacer space={"py-12 w-full"} />
         {/* Projects */}
-        <div className="my-10">
+        <div className="my-10" id="projects">
           <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-gray-200 text-center pb-5 uppercase">
             Projects
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
             <ProjectCard
               image={DucksRow}
-              title="Project 1"
-              description="Description 1"
+              title="Ducks Row"
+              description="Duck's Row is a web platform that helps users find hangout spots by filtering options based on location and budget."
+              anchor="https://github.com/Duck-s-Row/Duck-s-Row.github.io"
             />
             <ProjectCard
               image={DucksRow}
-              title="Project 2"
-              description="Description 2"
+              title="ToDo App"
+              description="A Simple ToDo app is built using React Native. The app provides a clean interface for adding, viewing, and completing tasks."
+              anchor="https://github.com/Kareem2003/TodoApp"
             />
             <ProjectCard
               image={DucksRow}
-              title="Project 3"
-              description="Description 3"
+              title="NCT Table"
+              description="This project is a simple Flutter application to show the time table of the NCT."
+              anchor="https://github.com/Kareem2003/NCT_Table"
+            />
+            <ProjectCard
+              image={DucksRow}
+              title="Wagbat"
+              description="Wagbat is a food delivery application designed to facilitate food delivery service to fellow students. "
+              anchor="https://github.com/Kareem2003/NCT_Table"
             />
           </div>
         </div>
         <Spacer space={"py-12 w-full"} />
         {/* Contact */}
-        <div className="my-10">
+        <div className="my-10" id="contact">
           <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-gray-200 text-center pb-5 uppercase">
             Get In Touch
           </h2>

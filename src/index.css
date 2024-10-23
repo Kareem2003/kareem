@@ -7,6 +7,10 @@
   color: #ffffff;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .rsis-container {
   position: relative;
   top: 50%;
