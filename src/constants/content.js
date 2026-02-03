@@ -66,27 +66,36 @@ export const SKILLS = [
 
 export const EXPERIENCES = [
   {
-    company: "Odoo Developer",
-    role: "Software Engineer",
-    duration: "Present",
+    company: "Pomo Tech",
+    role: "Odoo Developer",
+    duration: "09/2024 - Present",
     description:
-      "Developing and customizing Odoo modules for Accounting, Sales, and Inventory. Experienced in refactoring complex QWeb reports, implementing promotion logic, and optimizing database inputs using Python, XML, and PostgreSQL. Successfully resolved critical issues in invoice report generation and API integrations.",
-    logo: null, // You might want to add an Odoo logo asset later
+      "Full-stack development of custom Odoo modules and applications, including reporting solutions. Integrated React Native frontend components with Odoo applications to deliver seamless, cross-platform user experiences.",
+    logo: Odoo, 
+  },
+  {
+    company: "PS Solutions",
+    role: "Front End Developer",
+    duration: "07/2024 - 10/2024",
+    description:
+      "Collaborated with a team to design and develop visually appealing UI using React JS. Implemented front-end designs to create dynamic, engaging websites that improve UI. Demonstrated expertise in crafting interactive user experiences across various projects.",
+    logo: PSsolutionCer,
+  },
+  {
+    company: "PS Solutions",
+    role: "Mobile Developer",
+    duration: "08/2023 - 10/2023",
+    description:
+      "Developed full-stack mobile applications using React Native and Laravel during internship. Created innovative mobile solutions with React Native and Laravel, enhancing user experience.",
+    logo: PSsolutionCer,
   },
   {
     company: "Savola Foods",
-    role: "Marketing Budget Automation Intern",
-    duration: "4 Months (2022)",
+    role: "IT Intern – Marketing and Budget Automation",
+    duration: "07/2022 - 09/2022",
     description:
-      "Completed a 4-month internship contributes to the 'Marketing Budget Automation' project. Worked with Oracle ERP, Oracle SQL, and other tools to automate budget control, purchase orders, and approval processes.",
-    logo: SavolaCer, // Using the cert image as logo for now
-  },
-  {
-    company: "PSsolution",
-    role: "Intern",
-    duration: "2023",
-    description: "Gained practical experience in software development and professional workflows during this internship.",
-    logo: PSsolutionCer,
+      "Gained practical experience in the IT department of a multinational company. Worked with Oracle systems to support data management and reporting processes. Collaborated with senior IT, finance, and Marketing teams to streamline workflow processes.",
+    logo: SavolaCer,
   },
 ];
 
