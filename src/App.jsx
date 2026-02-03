@@ -11,6 +11,8 @@ import Certifications from "./components/Certifications";
 import Contact from "./components/Contact";
 import { SOCIAL_LINKS } from "./constants/content";
 
+import About from "./components/About";
+
 function App() {
   return (
     <div className="bg-dark text-white font-Inter min-h-screen selection:bg-primary/30 selection:text-white">
@@ -18,6 +20,7 @@ function App() {
       
       <main>
         <Hero />
+        <About />
         <SkillsLoop />
         <Experience />
         <Projects />
