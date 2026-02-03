@@ -2,30 +2,70 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  background-color: #191919;
-  color: #ffffff;
+@layer base {
+  :root {
+    --color-bg: #0f172a;
+    --color-primary: #3b82f6; /* Blue-500 */
+    --color-secondary: #8b5cf6; /* Violet-500 */
+    --color-text: #f3f4f6;
+    --color-muted: #9ca3af;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    overflow-x: hidden;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500;
+  }
+  
+  .glass {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-xl;
+  }
+  
+  .glass-card {
+    @apply bg-slate-900/50 backdrop-blur-md border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300;
+  }
+
+  .nav-glass {
+    @apply bg-slate-950/80 backdrop-blur-md border-b border-white/5;
+  }
 }
 
-.rsis-container {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(15%, 15%);
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-.rsis-container > div:not(.rsis-image) {
-  display: none !important;
+::-webkit-scrollbar-track {
+  background: #0f172a;
 }
 
-.rsis-image {
-  background-position: center center !important; /* Ensure the image is centered */
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
-  width: 70% !important;
-  height: 70% !important;
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }

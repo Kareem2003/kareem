@@ -16,6 +16,8 @@ import SavolaCer from "./images/Savola-cer.png";
 import SoftSkillsCer from "./images/Soft-skills-cer.png";
 import WebDevCer1 from "./images/Web-dev-cer.png";
 import WebDevCer2 from "./images/Web-Development-cer.png";
+import Odoo from "./images/odoo.png";
+import Python from "./images/python.png";
 
 export const assets = {
   CSS,
@@ -35,5 +37,7 @@ export const assets = {
   SavolaCer, 
   SoftSkillsCer, 
   WebDevCer1, 
-  WebDevCer2, 
+  WebDevCer2,
+  Odoo,
+  Python,
 };

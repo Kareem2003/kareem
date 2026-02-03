@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { ImCancelCircle } from "react-icons/im";
 import { HiMiniBars3 } from "react-icons/hi2";
-import CV from "../../assets/myCV.pdf";
+import { HERO_CONTENT } from "../../constants/content";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -18,89 +28,91 @@ const NavBar = () => {
     }
   }, [isOpen]);
 
+  const navLinks = [
+    { name: "Home", href: "#home" },
+    { name: "About", href: "#about" },
+    { name: "Experience", href: "#experience" },
+    { name: "Projects", href: "#projects" },
+    { name: "Contact", href: "#contact" },
+  ];
+
   return (
-    <div className="relative flex mb-12 justify-between items-center">
-      {/* Logo */}
-      <div className="flex text-3xl z-20">
-        <h1 className="font-bold">Kareem</h1>
-        <span className="font-bold text-primary">.</span>
-      </div>
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? "nav-glass py-4" : "bg-transparent py-6"
+      }`}
+    >
+      <div className="container mx-auto px-6 flex justify-between items-center">
+        {/* Logo */}
+        <div className="text-2xl font-bold tracking-tighter">
+          Kareem<span className="text-primary">.</span>
+        </div>
 
-      {/* Hamburger Icon */}
-      <div className="lg:hidden z-20">
-        <button
-          onClick={toggleMenu}
-          className="text-3xl relative focus:outline-none transition-transform duration-300"
-        >
-          {/* Hamburger Icon */}
-          <span
-            className={`transition-transform duration-500 ease-in-out ${
-              isOpen ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
-            }`}
-          >
-            <HiMiniBars3 />
-          </span>
-          {/* Close Icon */}
-          <span
-            className={`transition-transform duration-500 ease-in-out absolute inset-0 ${
-              isOpen ? "rotate-0 opacity-100" : "rotate-90 opacity-0"
-            }`}
-          >
-            <ImCancelCircle />
-          </span>
-        </button>
-      </div>
-
-      {/* Full-Screen Dropdown Menu */}
-      <ul
-        className={`fixed inset-0 flex flex-col justify-center items-center gap-7 text-3xl text-center transition-transform transform ${
-          isOpen ? "translate-x-0 bg-gray " : "translate-x-full"
-        } lg:relative lg:translate-x-0 lg:flex lg:flex-row lg:bg-transparent lg:gap-7 lg:text-lg lg:justify-end`}
-      >
-        <li className="relative">
+        {/* Desktop Menu */}
+        <div className="hidden lg:flex items-center gap-8">
+          <ul className="flex gap-8">
+            {navLinks.map((link) => (
+              <li key={link.name}>
+                <a
+                  href={link.href}
+                  className="text-sm font-medium hover:text-primary transition-colors relative group"
+                >
+                  {link.name}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              </li>
+            ))}
+          </ul>
           <a
-            href="#home"
-            className="hover:text-primary before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-primary before:transition-all before:duration-300 before:ease-in-out hover:before:w-full"
-          >
-            Home
-          </a>
-        </li>
-        <li className="relative">
-          <a
-            href={CV}
+            href={HERO_CONTENT.resumeLink}
             download="Kareem_Abdallah_CV.pdf"
             target="_blank"
-            className="hover:text-primary before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-primary before:transition-all before:duration-300 before:ease-in-out hover:before:w-full"
+            rel="noopener noreferrer"
+            className="px-6 py-2 rounded-full border border-white/20 hover:bg-white/10 hover:border-primary/50 transition-all text-sm font-semibold"
           >
             Resume
           </a>
-        </li>
-        <li className="relative">
-          <a
-            href="#certificates"
-            className="hover:text-primary before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-primary before:transition-all before:duration-300 before:ease-in-out hover:before:w-full"
+        </div>
+
+        {/* Mobile Hamburger */}
+        <div className="lg:hidden z-50">
+          <button
+            onClick={toggleMenu}
+            className="text-3xl focus:outline-none transition-transform duration-300"
           >
-            Certificates
-          </a>
-        </li>
-        <li className="relative">
+            {isOpen ? <ImCancelCircle /> : <HiMiniBars3 />}
+          </button>
+        </div>
+
+        {/* Mobile Dropdown */}
+        <div
+          className={`fixed inset-0 bg-dark/95 backdrop-blur-xl flex flex-col justify-center items-center gap-8 text-2xl transition-all duration-300 ${
+            isOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+          }`}
+        >
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={() => setIsOpen(false)}
+              className="hover:text-primary transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
           <a
-            href="#projects"
-            className="hover:text-primary before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-primary before:transition-all before:duration-300 before:ease-in-out hover:before:w-full"
+            href={HERO_CONTENT.resumeLink}
+            download="Kareem_Abdallah_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-3 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition-all text-xl"
+            onClick={() => setIsOpen(false)}
           >
-            Projects
+            Download Resume
           </a>
-        </li>
-        <li className="relative">
-          <a
-            href="#contact"
-            className="hover:text-primary before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-primary before:transition-all before:duration-300 before:ease-in-out hover:before:w-full"
-          >
-            Contact
-          </a>
-        </li>
-      </ul>
-    </div>
+        </div>
+      </div>
+    </nav>
   );
 };
 
